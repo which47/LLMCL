@@ -49,15 +49,15 @@ customize your training scripts and run it.
 
 ## Acknowledgement
 
-This repo benefits from the following repos and papers:
+If you find this repository helpful, please consider citing our work.
 
 ```bibtex
-@misc{wang2023trace,
-      title={TRACE: A Comprehensive Benchmark for Continual Learning in Large Language Models}, 
-      author={Xiao Wang and Yuansen Zhang and Tianze Chen and Songyang Gao and Senjie Jin and Xianjun Yang and Zhiheng Xi and Rui Zheng and Yicheng Zou and Tao Gui and Qi Zhang and Xuanjing Huang},
-      year={2023},
-      eprint={2310.06762},
+@misc{ren2024analyzing,
+      title={Analyzing and Reducing Catastrophic Forgetting in Parameter Efficient Tuning}, 
+      author={Weijieying Ren and Xinlong Li and Lei Wang and Tianxiang Zhao and Wei Qin},
+      year={2024},
+      eprint={2402.18865},
       archivePrefix={arXiv},
-      primaryClass={cs.CL}
+      primaryClass={cs.LG}
 }
 ```
