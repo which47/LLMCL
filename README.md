@@ -2,7 +2,7 @@
 <span><i>LLMCL</i></span>
 </h1>
 <h3 align="center">
-Parameter Efficient Continual Learning For Large language Models
+Analyzing and Reducing Catastrophic Forgetting in Parameter Efficient Tuning
 </h3>
 
 ## Overview
