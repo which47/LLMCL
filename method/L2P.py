@@ -1,6 +1,6 @@
 from typing import Optional, List, Union, Tuple
 
-import torch, os, wandb
+import torch, os 
 import torch.utils.data
 from torch import nn
 from transformers.modeling_outputs import CausalLMOutputWithPast
@@ -90,11 +90,6 @@ class L2PModel(LlamaForCausalLM):
             i_input_embeds_mean = torch.max(i_input_embeds, dim=1)[0]
         elif self.embeding_key == 'mean_max':
             i_input_embeds_mean = torch.max(i_input_embeds, dim=1)[0] + 2 * torch.mean(i_input_embeds, dim=1)
-        elif self.embeding_key == 'cls':
-            if cls_features is None:
-                i_input_embeds_mean = torch.max(i_input_embeds, dim=1)[0]
-            else:
-                i_input_embeds_mean = cls_features
         else:
             raise NotImplementedError("Not supported way of calculating embedding keys!")
         
@@ -149,15 +144,11 @@ class L2PTrainer(BaseTrainerCL):
         return outputs # since we only calculate loss in model.forward(), we return outputs here
         
     def continual_learning(self):
-        resume_from_checkpoint = "False"
-        for name, train_set in self.continual_training_dataset.items():
-            self.current_task_name = name
+        for i, name in enumerate(self.task_names):
             self.model.current_task_name = name
-            self.update_adapter_and_train_set(resume_from_checkpoint, train_set)
+            self.before_task_start(name)
             self.train()
-            resume_from_checkpoint = self.save_model(name)
-            self.model.save_prompt_weights(self.args.output_dir)
-        wandb.finish()
+            self.after_task_end(name)
 
     def save_model(self, name) -> str:
         if self.args.output_dir is not None:

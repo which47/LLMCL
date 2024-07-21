@@ -13,31 +13,29 @@ LLMCL is a repository based on the Hugging Face Transformers library, designed t
 - **Model Customization:** You can easily customize the model you want to use, and the repository will automatically download the corresponding model.
 
 ## Quick Start
-1.Clone the repository
+### 1.Install dependencies
 ```bash
-git clone  https://github.com/which47/LLMCL.git
-```
-
-2.Install dependencies
-
-```bash
+conda create -n llmcl python==3.10
 pip install -r requirements.txt
 ```
-3.Start Training
-
-[//]: # (You can use our own scripts or modify it at your convenience.)
+### 2.Start Training
 ```bash
-deepspeed main.py \
-  --model_name_or_path 'meta-llama/Llama-2-7b-hf' \
-  --output_dir "./outputs/models/seq" \
-  --dataset_name "C-STANCE,FOMC,MeetingBank,ScienceQA,NumGLUE-cm,20Minuten,medmcqa,jecqa" \
-  --per_device_train_batch_size 16 \
-  --adapter lora
+./scripts/train_seq.sh
 ```
+### 3.Inference
+```
+./scripts/infer_seq.sh
+```
+### 4. customize
+You can easily customize scripts for your own use:
 
+- Ensure your dataset is organized in JSON format with `prompt` and `answer` as keys.
+- Save the dataset file to `<DATA_PATH>/<DATASET_NAME>/<SPLIT>.json`
+- For more details, refer to the [get_dataset.py](get_dataset.py) file.
+     
 ## Reproduce
-
-1.Request the access to ```llama2``` model and download [TRACE Benchmark](https://drive.google.com/file/d/1S0SmU0WEw5okW_XvP2Ns0URflNzZq6sV/view?usp=drive_link) , [MedMCQA](https://medmcqa.github.io/),[JEC-QA](https://jecqa.thunlp.org/) to `./data_files` folder.
+To Reproduce our results, you need \
+**1.** Request the access to `llama2` model and download [TRACE Benchmark](https://drive.google.com/file/d/1S0SmU0WEw5okW_XvP2Ns0URflNzZq6sV/view?usp=drive_link) , [MedMCQA](https://medmcqa.github.io/),[JEC-QA](https://jecqa.thunlp.org/) to `./data_files` folder.
 
 
 2.run scripts
@@ -47,8 +45,7 @@ customize your training scripts and run it.
 
 
 
-## Acknowledgement
-
+## Citation
 If you find this repository helpful, please consider citing our work.
 
 ```bibtex
