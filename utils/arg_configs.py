@@ -6,10 +6,10 @@ from dataclasses import dataclass, field
 from transformers import HfArgumentParser, TrainingArguments, GenerationConfig, BitsAndBytesConfig
 from peft import LoraConfig, TaskType
 import warnings
-from utils.functions import list_strings
 __all__ = ["get_args", "CLArguments", "TuningArguments", "DataArguments"]
-import bitsandbytes
 
+def list_strings(string: str) -> List[str]:
+    return string.split(",")
 @dataclass
 class DataArguments:
     data_path: Union[str, Path] = "./TRACE-Benchmark/LLM-CL-Benchmark_5000"
